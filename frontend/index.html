@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ÖPNV Empire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Silkscreen:wght@400;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/style.css">
+</head>
+<body>
+<header class="sticky top-0 w-full bg-black">
+    <h1 class="text-white text-2xl text-center p-2">ÖPNV Empire</h1>
+</header>
+<footer>
+
+</footer>
+<h1 class="text-3xl font-bold underline text-blue-800">
+    Hello world!
+</h1>
+<p id="status">Backend: Waiting</p>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let status = document.getElementById("status");
+        status.innerText = "Backend: Waiting";
+        fetch("/api").then((response) => {
+            status.innerText = "Backend: Online";
+            response.json().then((data) => {
+                console.log(data);
+            });
+        });
+    });
+</script>
+</html>

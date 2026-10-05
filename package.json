@@ -1,0 +1,17 @@
+{
+  "name": "öpnv-empire",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx @tailwindcss/cli -i ./frontend/resources/css/style.css -o ./frontend/dist/css/style.css --minidy",
+    "watch:css": "npx @tailwindcss/cli -i ./frontend/resources/css/style.css -o ./frontend/dist/css/style.css --watch",
+    "run:js": "node ./backend/index.js"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "express": "^5.2.1"
+  },
+  "private": true
+}

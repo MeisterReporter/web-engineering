@@ -1,0 +1,28 @@
+@import "tailwindcss";
+/* Import further style files here */
+
+* {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Tailwind does support layers:
+ @layer base {
+    ...
+ }
+ */
+
+/* Fonts */
+
+.silkscreen-regular {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.silkscreen-bold {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
