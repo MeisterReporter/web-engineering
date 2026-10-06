@@ -1,10 +1,86 @@
 @import "tailwindcss";
 /* Import further style files here */
+@import "./theme.css";
 
-* {
-    font-family: "Silkscreen", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+:root {
+    --cell: 32;
+    --cols: 44;
+
+    --reactive-gradient-z-index: -1;
+    --linear-gradient-z-index: -2;
+}
+
+.gradient-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    inset: 0;
+    z-index: -1;
+
+    grid-template-columns: repeat(var(--cols), calc(var(--cell) * 1px));
+    grid-auto-rows: calc(var(--cell) * 1px);
+
+    pointer-events: none;
+    /* Custom Properties */
+    --radius: 7;
+    --color-far: #2C3A63;
+    --color-near: #FFBF3C;
+    --steps: 4;
+
+    --mx: -99;
+    --my: -99;
+}
+
+.reactive-gradient-grid {
+    z-index: var(--reactive-gradient-z-index);
+}
+
+.linear-gradient-grid {
+    z-index: var(--linear-gradient-z-index);
+}
+
+.reactive-gradient-cell {
+    /* Custom Properties */
+    --cx: 0;
+    --cy: 0;
+    --b: 0;
+
+    /* glow: 1 at the pointer, 0 at --radius; --b adds ordered-dither noise. */
+    --g: clamp(0, calc(1 - hypot(var(--cx) - var(--mx), var(--cy) - var(--my)) / var(--radius) + var(--b)), 1);
+    /* Quantization */
+    --q: round(down, var(--g), calc(1 / var(--steps)));
+    background: color-mix(in oklab, var(--color-far), var(--color-near) calc(var(--q) * 100%));
+    opacity: calc(var(--q) * 0.6);
+}
+
+.linear-gradient-cell {
+    /* Custom Properties */
+    --cx: 0;
+    --cy: 0;
+    --b: 0;
+
+    /* glow: 1 at the pointer, 0 at --radius; --b adds ordered-dither noise. */
+    --g: clamp(0, calc(1 - hypot(var(--cx), var(--cy))), 1);
+    /* Quantization */
+    --q: round(down, var(--g), calc(1 / var(--steps)));
+    background: color-mix(in oklab, var(--color-far), var(--color-near) calc(var(--q) * 100%));
+    opacity: calc(var(--q) * 0.6);
+}
+
+.animated-button {
+    display: inline-flex;
+    position: relative;
+    isolation: isolate;
+}
+
+.animated-button.frame {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
 }
 
 /* Tailwind does support layers:
