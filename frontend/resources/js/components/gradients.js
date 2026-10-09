@@ -13,7 +13,6 @@ export class ReactiveRadialGradient extends CSSComponent {
     }
 
     modifyElement(domElement) {
-        super.modifyElement(domElement);
         if (this.lastGrid != null) {
             this.lastGrid.remove();
         }
@@ -92,7 +91,6 @@ export class LinearGradient extends CSSComponent {
     }
 
     modifyElement(domElement) {
-        super.modifyElement(domElement);
         if (this.lastGrid != null) {
             this.lastGrid.remove();
         }
@@ -152,7 +150,6 @@ export class LinearGradient extends CSSComponent {
             });
             colors = tmp;
         }
-        console.log(colors);
 
         const cols = Math.ceil(domElement.clientWidth / cell);
         const rows = Math.ceil(domElement.clientHeight / cell);
@@ -176,7 +173,7 @@ export class LinearGradient extends CSSComponent {
                 const el = document.createElement("div");
                 const bias = (BAYER[row % 2][col % 2] / 4 - 0.375) * 0.3;
                 const {r, g, b, a} = colorAt(col + 0.5, row + 0.5);
-                el.style.backgroundColor = `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${(a - bias).toFixed(3)})`;
+                el.style.backgroundColor = `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${Math.max(a - bias, 0).toFixed(3)})`;
                 grid.appendChild(el);
             }
         }

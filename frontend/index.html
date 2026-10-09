@@ -8,32 +8,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Silkscreen:wght@400;700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="dist/css/style.css">
+    <script type="module">
+        import {openOverlay} from "./resources/js/core.js";
+
+        window.openOverlay = openOverlay;
+    </script>
     <script type="module" src="resources/js/components.js"></script>
+    <script type="module" src="resources/js/components/tabs.js"></script>
 </head>
 <body>
-<header class="sticky top-0 w-full z-10 bg-bg-raised border-b-4 border-b-line">
-    <h1 class="text-white text-3xl text-shadow-2xs text-start font-bold p-4 pt-8 pb-8">ÖPNV Empire</h1>
+<header class="sticky top-0 w-full z-10 flex justify-between items-center p-4 pt-6 pb-6 bg-bg-raised border-b-4 border-b-line">
+    <h1 class="text-white text-3xl text-shadow-2xs text-start font-bold">ÖPNV Empire</h1>
+    <button class="rounded bus" onclick="openOverlay(this);" for="tab-group-login"><span>Anmelden</span></button>
+    <div class="tab-pane overlay top right hidden" tabindex="-1" id="tab-group-login">
+        <div class="tabs">
+            <button class="tab" for="tab-login">Login</button>
+            <button class="tab" for="tab-register">Registrieren</button>
+        </div>
+        <div class="content">
+            <div id="tab-login">
+                <form name="login" action="/login" onsubmit="return false;" method="post"
+                      class="flex flex-col">
+                    <label for="login-username">Spielername</label>
+                    <input type="text" id="login-username" name="username" placeholder="Pixel_Pendler">
+                    <label for="login-password">Passwort</label>
+                    <input type="password" id="login-password" name="password" placeholder="********">
+
+                    <button type="submit" class="rounded bus mt-2 self-end"><span>Weiter</span></button>
+                </form>
+            </div>
+            <div id="tab-register" class="flex flex-col">
+                <form name="register" action="/register" onsubmit="return false;" method="post"
+                      class="flex flex-col">
+                    <label for="register-username">Spielername</label>
+                    <input type="text" id="register-username" name="register-username" placeholder="Pixel_Pendler">
+                    <label for="register-email">E-Mail</label>
+                    <input type="email" id="register-email" name="email" placeholder="pixel_pendler@beispiel.de">
+                    <label for="register-password">Passwort</label>
+                    <input type="password" id="register-password" name="password" placeholder="********">
+
+                    <button type="submit" class="rounded bus mt-2 self-end"><span>Weiter</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
 </header>
 <section>
-    <div class="linear-gradient reactive-radial-gradient overflow-clip" angle="0" start="0,0"
+    <div class="flex flex-col items-center linear-gradient reactive-radial-gradient overflow-clip" angle="0" start="0,0"
          colors="--color-line, #00000000, #00000000">
         <p class="text-center text-bus pt-20 pb-10">Stadt - Transport - Ansturm</p>
-        <h1 class="max-w-xl text-center text-5xl font-bold mr-auto ml-auto">Baue dein Netz.<br>Halte dem Ansturm stand.
+        <h1 class="max-w-xl text-center text-5xl font-bold">Baue dein Netz.<br>Halte dem Ansturm stand.
         </h1>
-        <p class="max-w-2xl text-center text-mute mr-auto ml-auto pt-10 pb-10">Baue deine Stadt auf echtem Gelände. Baue
+        <p class="max-w-2xl text-center text-mute pt-10 pb-10">Baue deine Stadt auf echtem Gelände. Baue
             Schienen, Straßen und Gebäude um das beste Transportnetz zu entwickeln. Teste dein angebot gegen
             Passagierfluten, allein oder im PvP.</p>
-        <div class="flex justify-center pb-10">
-            <a class="animated-button aspe" href="#" fps="10" size="6">
-                <span id="text" class="text-black font-bold">Jetzt Spielen</span>
-                <div id="frames" hidden aria-hidden="true">
-                    <img src="resources/img/train_button_frame_1.png" alt="Train Frame 1">
-                    <img src="resources/img/train_button_frame_2.png" alt="Train Frame 2">
-                    <img src="resources/img/train_button_frame_3.png" alt="Train Frame 3">
-                    <img src="resources/img/train_button_frame_4.png" alt="Train Frame 4">
-                </div>
-            </a>
-        </div>
+        <a class="animated-button bp-10" href="#" fps="10" size="6">
+            <span id="text" class="text-black font-bold">Jetzt Spielen</span>
+            <div id="frames" hidden aria-hidden="true">
+                <img src="resources/img/train_button_frame_1.png" alt="Train Frame 1">
+                <img src="resources/img/train_button_frame_2.png" alt="Train Frame 2">
+                <img src="resources/img/train_button_frame_3.png" alt="Train Frame 3">
+                <img src="resources/img/train_button_frame_4.png" alt="Train Frame 4">
+            </div>
+        </a>
     </div>
 </section>
 <footer class="w-full bg-bg-raised border-t-4 border-t-line p-4 pt-8 pb-8">

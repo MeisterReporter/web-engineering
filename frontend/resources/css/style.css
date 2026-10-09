@@ -1,6 +1,8 @@
 @import "tailwindcss";
 /* Import further style files here */
 @import "./theme.css";
+@import "./gradients.css";
+@import "./tabs.css";
 
 :root {
     --cell: 32;
@@ -10,64 +12,111 @@
     --linear-gradient-z-index: -2;
 }
 
-.gradient-grid {
+/* Borders */
+
+@utility pixel-border {
+    box-shadow: -4px 0 0 var(--color-line-hi), 4px 0 0 var(--color-line-hi), 0 -4px 0 var(--color-line-hi), 0 4px 0 var(--color-line-hi);
+}
+
+@utility pixel-border-hi {
+    box-shadow: -4px 0 0 var(--color-bus), 4px 0 0 var(--color-bus), 0 -4px 0 var(--color-bus), 0 4px 0 var(--color-bus);
+}
+
+/* Normal Style */
+
+button:has(span) {
+    --face: var(--color-bus);
+    --face-dim: var(--color-bus-dark);
+    --edge: var(--color-black);
+    @apply inline-block;
+    cursor: pointer;
+
+    color: black;
+
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    /* Border with hard drop shadows */
+    filter: drop-shadow(0.25rem 0 0 var(--edge)) drop-shadow(-0.25rem 0 0 var(--edge)) drop-shadow(0 0.25rem 0 var(--edge)) drop-shadow(0 -0.25rem 0 var(--edge));
+}
+
+button.bus {
+    --face: var(--color-bus);
+    --face-dim: var(--color-bus-dark);
+}
+
+button.train {
+    --face: var(--color-train);
+    --face-dim: var(--color-train-dark);
+}
+
+button > span {
+    @apply p-8 pt-4 pb-4;
+    position: relative;
+    background: var(--face);
+    box-shadow: 0 -0.25rem var(--face-dim) inset;
+}
+
+button > span::after {
+    --shine: rgba(255, 255, 255, 0.5);
+    --width: 24px;
+    content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-
-    display: grid;
-    inset: 0;
-    z-index: -1;
-
-    grid-template-columns: repeat(var(--cols), calc(var(--cell) * 1px));
-    grid-auto-rows: calc(var(--cell) * 1px);
-
+    top: 0;
+    bottom: 0;
+    left: calc(var(--width) * -1);
+    width: var(--width);
     pointer-events: none;
-    /* Custom Properties */
-    --radius: 7;
-    --color-far: #2C3A63;
-    --color-near: #FFBF3C;
-    --steps: 4;
-
-    --mx: -99;
-    --my: -99;
+    background: /* dithered left edge */ conic-gradient(var(--shine) 25%, transparent 0 50%, var(--shine) 0 75%, transparent 0) 0 0 / 8px 8px repeat-y,
+        /* solid core */ linear-gradient(var(--shine), var(--shine)) 8px 0 / 8px 100% no-repeat,
+        /* dithered right edge */ conic-gradient(transparent 25%, var(--shine) 0 50%, transparent 0 75%, var(--shine) 0) 16px 0 / 8px 8px repeat-y;
+    background-repeat: repeat-y, no-repeat, repeat-y;
+    background-size: 8px 8px, 8px 100%, 8px 8px;
+    background-position: 0 0, 8px 0, 16px 0;
+    opacity: 0;
 }
 
-.reactive-gradient-grid {
-    z-index: var(--reactive-gradient-z-index);
+button:hover > span::after {
+    animation: pixel-shimmer 0.4s steps(14) 1 forwards;
 }
 
-.linear-gradient-grid {
-    z-index: var(--linear-gradient-z-index);
+button:has(span):active {
+    transform: translateY(0.125rem);
 }
 
-.reactive-gradient-cell {
-    /* Custom Properties */
-    --cx: 0;
-    --cy: 0;
-    --b: 0;
-
-    /* glow: 1 at the pointer, 0 at --radius; --b adds ordered-dither noise. */
-    --g: clamp(0, calc(1 - hypot(var(--cx) - var(--mx), var(--cy) - var(--my)) / var(--radius) + var(--b)), 1);
-    /* Quantization */
-    --q: round(down, var(--g), calc(1 / var(--steps)));
-    background: color-mix(in oklab, var(--color-far), var(--color-near) calc(var(--q) * 100%));
-    opacity: calc(var(--q) * 0.6);
+button:has(span):active > span {
+    box-shadow: 0 0 var(--face-dim) inset;
 }
 
-.linear-gradient-cell {
-    /* Custom Properties */
-    --cx: 0;
-    --cy: 0;
-    --b: 0;
-
-    /* glow: 1 at the pointer, 0 at --radius; --b adds ordered-dither noise. */
-    --g: clamp(0, calc(1 - hypot(var(--cx), var(--cy))), 1);
-    /* Quantization */
-    --q: round(down, var(--g), calc(1 / var(--steps)));
-    background: color-mix(in oklab, var(--color-far), var(--color-near) calc(var(--q) * 100%));
-    opacity: calc(var(--q) * 0.6);
+@keyframes pixel-shimmer {
+    0% {
+        left: -24px;
+        opacity: 1;
+    }
+    100% {
+        left: 101%;
+        opacity: 1;
+    }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    button:hover > span::after {
+        animation: none;
+    }
+}
+
+/* Rounded Style */
+
+button.rounded > span {
+    /* Pixelated Rounded Edges */
+    clip-path: polygon(
+            0 8px, 4px 8px, 4px 4px, 8px 4px, 8px 0,
+            calc(100% - 8px) 0, calc(100% - 8px) 4px, calc(100% - 4px) 4px, calc(100% - 4px) 8px, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 4px) calc(100% - 8px), calc(100% - 4px) calc(100% - 4px), calc(100% - 8px) calc(100% - 4px), calc(100% - 8px) 100%,
+            8px 100%, 8px calc(100% - 4px), 4px calc(100% - 4px), 4px calc(100% - 8px), 0 calc(100% - 8px));
+}
+
+/* Animated */
 
 .animated-button {
     display: inline-flex;
@@ -81,6 +130,41 @@
     width: 100%;
     height: auto;
     image-rendering: pixelated;
+}
+
+/* Overlays */
+
+.overlay {
+    position: absolute;
+    z-index: 100;
+
+    @apply bg-bg-raised shadow-pixel-hi;
+
+    margin-top: 2rem;
+}
+
+.overlay.top.right {
+    right: 1rem;
+    top: 5rem;
+}
+
+/* Input */
+
+label:has(+ input) {
+    @apply text-mute;
+}
+
+input {
+    @apply text-white bg-bg pixel-border p-4 pt-3 pb-3 mt-2 mb-4;
+}
+
+input:focus {
+    @apply pixel-border-hi outline-4 outline-dashed outline-white;
+    outline-offset: 6px;
+}
+
+input::placeholder {
+    @apply text-line-hi;
 }
 
 /* Tailwind does support layers:

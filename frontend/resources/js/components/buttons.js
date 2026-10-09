@@ -12,8 +12,6 @@ export class AnimatedButton extends CSSComponent {
     }
 
     modifyElement(domElement) {
-        super.modifyElement(domElement);
-
         if (this.lastFrame != null) {
             this.lastFrame.remove();
         }
