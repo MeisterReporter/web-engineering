@@ -3,6 +3,7 @@
 @import "./theme.css";
 @import "./gradients.css";
 @import "./tabs.css";
+@import "./tooltips.css";
 
 :root {
     --cell: 32;
@@ -24,7 +25,7 @@
 
 /* Normal Style */
 
-button:has(span) {
+button:has(span:not(.tooltip-text)) {
     --face: var(--color-bus);
     --face-dim: var(--color-bus-dark);
     --edge: var(--color-black);
@@ -35,6 +36,8 @@ button:has(span) {
 
     padding-top: 1rem;
     padding-bottom: 1rem;
+
+    overflow: clip;
 
     /* Border with hard drop shadows */
     filter: drop-shadow(0.25rem 0 0 var(--edge)) drop-shadow(-0.25rem 0 0 var(--edge)) drop-shadow(0 0.25rem 0 var(--edge)) drop-shadow(0 -0.25rem 0 var(--edge));
@@ -50,14 +53,28 @@ button.train {
     --face-dim: var(--color-train-dark);
 }
 
-button > span {
+button.outlined {
+    @apply text-white border-4 border-line-hi bg-transparent p-8 pt-4 pb-4;
+    cursor: pointer;
+}
+
+button.outlined:hover {
+    @apply border-white;
+}
+
+button.outlined.square {
+    @apply p-0 w-8;
+    aspect-ratio: 1;
+}
+
+button > span:not(.tooltip-text) {
     @apply p-8 pt-4 pb-4;
     position: relative;
     background: var(--face);
     box-shadow: 0 -0.25rem var(--face-dim) inset;
 }
 
-button > span::after {
+button > span:not(.tooltip-text)::after {
     --shine: rgba(255, 255, 255, 0.5);
     --width: 24px;
     content: '';
@@ -76,15 +93,15 @@ button > span::after {
     opacity: 0;
 }
 
-button:hover > span::after {
+button:hover > span:not(.tooltip-text)::after {
     animation: pixel-shimmer 0.4s steps(14) 1 forwards;
 }
 
-button:has(span):active {
+button:has(span:not(.tooltip-text)):active {
     transform: translateY(0.125rem);
 }
 
-button:has(span):active > span {
+button:has(span:not(.tooltip-text)):active > span {
     box-shadow: 0 0 var(--face-dim) inset;
 }
 
@@ -155,7 +172,7 @@ label:has(+ input) {
 }
 
 input {
-    @apply text-white bg-bg pixel-border p-4 pt-3 pb-3 mt-2 mb-4;
+    @apply text-white bg-bg pixel-border p-4 pt-3 pb-3 mt-2 mb-4 min-w-0;
 }
 
 input:focus {
@@ -165,6 +182,31 @@ input:focus {
 
 input::placeholder {
     @apply text-line-hi;
+}
+
+label.info {
+    display: none;
+    @apply mt-2 mb-4 text-white;
+}
+
+label.info.show {
+    display: block;
+}
+
+label.info.error {
+    @apply text-lose;
+}
+
+label.info.success {
+    @apply text-win;
+}
+
+label.info.warning {
+    @apply text-bus-dark;
+}
+
+input:has(+ label.info.show) {
+    @apply mb-0;
 }
 
 /* Tailwind does support layers:

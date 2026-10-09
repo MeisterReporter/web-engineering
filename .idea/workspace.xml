@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="287d9bde-29e0-4c12-a2c8-a09ffee91d35" name="Changes" comment="- Started to populate index page with content (Not yet localized)&#10;- Add CSS components for animated buttons and reactive gradients">
-      <change afterPath="$PROJECT_DIR$/frontend/resources/css/gradients.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/resources/css/input.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/resources/css/tabs.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/resources/js/components/tabs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/resources/js/core.js" afterDir="false" />
+    <list default="true" id="287d9bde-29e0-4c12-a2c8-a09ffee91d35" name="Changes" comment="- Implemented new components: Tabs, Floating Overlays&#10;- Styled Buttons, Tabs accordingly&#10;- Added Forms to index.html">
+      <change afterPath="$PROJECT_DIR$/frontend/resources/css/tooltips.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/resources/js/constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/resources/js/forms.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/resources/js/tooltip.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/resources/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/resources/js/components/buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/resources/js/components/buttons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/resources/js/components/gradients.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/resources/js/components/gradients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/resources/js/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/resources/js/core.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +171,7 @@
       <workItem from="1791200660093" duration="11162000" />
       <workItem from="1791438671523" duration="11074000" />
       <workItem from="1791478619013" duration="8000" />
-      <workItem from="1791523553846" duration="5166000" />
+      <workItem from="1791523553846" duration="13013000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -199,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791251295838</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- Implemented new components: Tabs, Floating Overlays&#10;- Styled Buttons, Tabs accordingly&#10;- Added Forms to index.html">
+      <option name="closed" value="true" />
+      <created>1791539435690</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1791539435690</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +215,7 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Added README back" />
     <MESSAGE value="- Started to populate index page with content (Not yet localized)&#10;- Add CSS components for animated buttons and reactive gradients" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Started to populate index page with content (Not yet localized)&#10;- Add CSS components for animated buttons and reactive gradients" />
+    <MESSAGE value="- Implemented new components: Tabs, Floating Overlays&#10;- Styled Buttons, Tabs accordingly&#10;- Added Forms to index.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Implemented new components: Tabs, Floating Overlays&#10;- Styled Buttons, Tabs accordingly&#10;- Added Forms to index.html" />
   </component>
 </project>

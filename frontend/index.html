@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="dist/css/style.css">
     <script type="module">
         import {openOverlay} from "./resources/js/core.js";
+        import {validateLogin, validateRegister} from "./resources/js/forms.js";
 
         window.openOverlay = openOverlay;
+        window.validateLogin = validateLogin;
+        window.validateRegister = validateRegister;
     </script>
+    <script type="module" src="resources/js/tooltip.js"></script>
     <script type="module" src="resources/js/components.js"></script>
     <script type="module" src="resources/js/components/tabs.js"></script>
 </head>
@@ -27,25 +31,42 @@
         </div>
         <div class="content">
             <div id="tab-login">
-                <form name="login" action="/login" onsubmit="return false;" method="post"
-                      class="flex flex-col">
+                <form name="login" action="/login" onsubmit="return validateLogin();" method="post"
+                      class="flex flex-col w-72">
                     <label for="login-username">Spielername</label>
                     <input type="text" id="login-username" name="username" placeholder="Pixel_Pendler">
+                    <label for="login-username" class="info">ERROR</label>
                     <label for="login-password">Passwort</label>
                     <input type="password" id="login-password" name="password" placeholder="********">
+                    <label for="login-password" class="info">ERROR</label>
 
                     <button type="submit" class="rounded bus mt-2 self-end"><span>Weiter</span></button>
                 </form>
             </div>
             <div id="tab-register" class="flex flex-col">
-                <form name="register" action="/register" onsubmit="return false;" method="post"
-                      class="flex flex-col">
+                <form name="register" action="/register" onsubmit="return validateRegister();" method="post"
+                      class="flex flex-col w-72">
                     <label for="register-username">Spielername</label>
-                    <input type="text" id="register-username" name="register-username" placeholder="Pixel_Pendler">
+                    <input type="text" id="register-username" name="username" placeholder="Pixel_Pendler">
+                    <label for="register-username" class="info">ERROR</label>
                     <label for="register-email">E-Mail</label>
                     <input type="email" id="register-email" name="email" placeholder="pixel_pendler@beispiel.de">
+                    <label for="register-email" class="info">ERROR</label>
                     <label for="register-password">Passwort</label>
-                    <input type="password" id="register-password" name="password" placeholder="********">
+                    <div class="flex flex-row items-center space-x-4">
+                        <input type="password" id="register-password" name="password" placeholder="********">
+                        <button type="button" class="outlined square tooltip left">
+                            ?
+                            <span class="tooltip-text text-left">
+                                - 12 Zeichen Lang<br>
+                                - Mindestens einen Großbuchstaben<br>
+                                - Mindestens einen Kleinbuchstaben<br>
+                                - Mindestens eine Zahl<br>
+                                - Mindestens ein Sonderzeichen<br>
+                            </span>
+                        </button>
+                    </div>
+                    <label for="register-password" class="info">ERROR</label>
 
                     <button type="submit" class="rounded bus mt-2 self-end"><span>Weiter</span></button>
                 </form>

@@ -44,3 +44,37 @@ export function openOverlay(self) {
         overlay.style.left = `calc(${left}px)`;
     }*/
 }
+
+export function showInfoLabel(input, message, type = "info", show = true) {
+    const id = input.attributes.getNamedItem("id")?.value ?? null;
+    if (id == null) {
+        throw new Error("showInfoLabel: input must have an id attribute");
+    }
+
+    const labels = document.querySelectorAll(`label[for="${id}"]`);
+    let label = null;
+    labels.forEach((l) => {
+        if (label == null && l.classList.contains("info")) {
+            label = l;
+        }
+    });
+    if (label == null) {
+        throw new Error("showInfoLabel: could not find label for input, id=" + id);
+    }
+
+    label.textContent = message;
+    label.classList.remove("error", "success", "warning");
+    if (type === "warning") {
+        label.classList.add("warning");
+    } else if (type === "error") {
+        label.classList.add("error");
+    } else if (type === "success") {
+        label.classList.add("success");
+    } // else default to info
+
+    if (show) {
+        label.classList.add("show");
+    } else {
+        label.classList.remove("show");
+    }
+}

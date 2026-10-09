@@ -1,0 +1,56 @@
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    container-type: inline-size;
+
+    cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip-text {
+    --tooltip-width: 0px;
+    --tooltip-offset: 1rem;
+    position: absolute;
+
+    min-width: 130px;
+    padding: 0.5rem;
+
+    background-color: black;
+    color: #FFFFFF;
+    @apply pixel-border-hi;
+
+    z-index: 1; /* Ensure tooltip is displayed above content */
+    visibility: hidden; /* Hidden by default */
+}
+
+.tooltip-text.right,
+.tooltip.right .tooltip-text {
+    top: -0.5rem;
+    left: calc(100% + var(--tooltip-offset));
+}
+
+.tooltip-text.left,
+.tooltip.left .tooltip-text {
+    top: -0.5rem;
+    right: calc(100% + var(--tooltip-offset));
+}
+
+.tooltip-text.top,
+.tooltip.top .tooltip-text {
+    bottom: calc(100% + var(--tooltip-offset));
+    left: 50%;
+    margin-left: calc(var(--tooltip-width) / -2);
+}
+
+.tooltip-text.bottom,
+.tooltip.bottom .tooltip-text {
+    top: calc(100% + var(--tooltip-offset));
+    left: 50%;
+    margin-left: calc(var(--tooltip-width) / -2);
+}
+
+/* Show the tooltip text on hover */
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
