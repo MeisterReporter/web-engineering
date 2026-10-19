@@ -26,5 +26,8 @@ Since this may be a project similar to live service games, that are never fully 
 - Saving Player Data: Connect to a Database using the Backend
 - Backend: Handles login, build, chooses random players to attack and saves city statistics
 
+# Tasks
+1. CSS Collisions: The CSS class `tab-pane` and `overlay` collide in the `position` property. The `tab-pane` class has a `position: relative;` while the `overlay` class has a `position: absolute;`. Here `position: absolute;` overrides `relative`, this is due to the declaration order inside the CSS file. The overlay class is implemented in `style.css`, while tap-pane is inside tabs.css. `tabs.css` is imported at the top of `styles.css`, therefore all its rules have a lower precedence than the rules defined later in the files itself. The solution would be to combine both classes inside a special rule and set the `position` that is required, instead of relying on the order of CSS files.
+
 ### Transparency
 Generative AI will be used in this Project to discuss ideas, architecture as well as performance optimization and independent test writing. Also Inline code completion from GitHub Copilot may be used, if the suggested code snippets is equal or similar to what the Dev wanted to write.
